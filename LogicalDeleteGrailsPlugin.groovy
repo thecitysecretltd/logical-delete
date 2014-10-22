@@ -1,8 +1,8 @@
 import com.nanlabs.grails.plugin.logicaldelete.LogicalDeleteDomainClassEnhancer
 
 class LogicalDeleteGrailsPlugin {
-	def version = "0.2"
-	def grailsVersion = "2.0 > *"
+	def version = "0.3-SNAPSHOT"
+	def grailsVersion = "2.4 > *"
 	def title = "Logical Delete Plugin"
 	def description = 'Allows you to do a logical deletion of domain classes'
 	def documentation = "http://grails.org/plugin/logical-delete"
