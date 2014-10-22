@@ -1,6 +1,5 @@
 package com.nanlabs.grails.plugin.logicaldelete
 
-import org.hibernate.engine.FilterDefinition
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -11,12 +10,6 @@ class LogicalDeleteDomainClassEnhancer {
 	private static final String PHYSICAL_PARAM = 'physical'
 	
 	private static final String DELETED_PARAM = 'deletedValue'
-	
-	private static FilterDefinition logicDeleteHibernateFilter
-	
-	static void setLogicDeleteFilter(FilterDefinition logicDeleteFilter) {
-		logicDeleteHibernateFilter = logicDeleteFilter
-	}
 
 	static void enhance(domainClasses) {
 		for (domainClass in domainClasses) {
@@ -35,18 +28,18 @@ class LogicalDeleteDomainClassEnhancer {
 	private static void addListDeletedMethod(clazz) {
 		log.debug "Adding withDeleted method to $clazz"
 		
-		clazz.metaClass.static.withDeleted = { Closure closure ->
-			delegate.withSession { session ->
-				session.disableFilter(logicDeleteHibernateFilter.filterName)
-			}
-			try {
-				closure()
-			} finally {
-				delegate.withSession { session ->
-					session.enableFilter(logicDeleteHibernateFilter.filterName).setParameter(DELETED_PARAM, false)
-				}
-			}
-		}		
+//		clazz.metaClass.static.withDeleted = { Closure closure ->
+//			delegate.withSession { session ->
+//				session.disableFilter(logicDeleteHibernateFilter.filterName)
+//			}
+//			try {
+//				closure()
+//			} finally {
+//				delegate.withSession { session ->
+//					session.enableFilter(logicDeleteHibernateFilter.filterName).setParameter(DELETED_PARAM, false)
+//				}
+//			}
+//		}
 	}
 
 	private static void changeDeleteMethod(clazz) {
