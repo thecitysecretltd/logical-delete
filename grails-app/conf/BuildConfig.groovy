@@ -30,6 +30,7 @@ grails.project.dependency.resolution = {
 				":rest-client-builder:1.0.3") {
 			export = false
 		}
+		compile ":hibernate4:4.3.5.5"
 
 		test ":code-coverage:2.0.3-2"
 	}

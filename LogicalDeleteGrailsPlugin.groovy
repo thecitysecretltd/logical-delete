@@ -21,5 +21,11 @@ class LogicalDeleteGrailsPlugin {
 
 	def doWithDynamicMethods = { ctx ->
 		LogicalDeleteDomainClassEnhancer.enhance(application.domainClasses)
+
+		application.domainClasses.each {
+			Class clazz = it.clazz
+			def ss = clazz.metaClass.'static'
+			int four = 2 + 2
+		}
 	}
 }

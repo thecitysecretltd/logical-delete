@@ -23,5 +23,4 @@ class LogicalDeleteASTTransformationSpec extends Specification
 		then:
 		test.deleted
 	}
-
 }
