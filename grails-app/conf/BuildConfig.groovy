@@ -4,6 +4,7 @@ grails.project.test.reports.dir = "target/test-reports"
 
 grails.project.fork = false
 
+//grails.plugin.location.'hibernate-hijacker' = '../grails-hibernate-hijacker'
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
 	// inherit Grails' default dependencies

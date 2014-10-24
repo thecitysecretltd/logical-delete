@@ -4,7 +4,6 @@ import org.codehaus.groovy.ast.ASTNode;
 import org.codehaus.groovy.ast.AnnotationNode;
 import org.codehaus.groovy.ast.ClassNode;
 import org.codehaus.groovy.ast.PropertyNode;
-import org.codehaus.groovy.ast.expr.AnnotationConstantExpression;
 import org.codehaus.groovy.ast.expr.ConstantExpression;
 import org.codehaus.groovy.control.CompilePhase;
 import org.codehaus.groovy.control.SourceUnit;
@@ -12,8 +11,6 @@ import org.codehaus.groovy.grails.compiler.injection.GrailsASTUtils;
 import org.codehaus.groovy.transform.ASTTransformation;
 import org.codehaus.groovy.transform.GroovyASTTransformation;
 import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
-import org.hibernate.annotations.ParamDef;
 
 import java.lang.reflect.Modifier;
 
@@ -49,26 +46,25 @@ public class LogicalDeleteASTTRansformation implements ASTTransformation{
 					null,
 					null);
 
-			AnnotationNode filter = new AnnotationNode(new ClassNode(Filter.class));
-			filter.addMember("name", new ConstantExpression("deletedFilter"));
-			filter.addMember("condition", new ConstantExpression("deleted = :deletedParam"));
-
-			deleted.addAnnotation(filter);
 			node.addProperty(deleted);
 		}
 	}
 	
 	private void addListDeletedMethod(ClassNode node)
 	{
-		AnnotationNode filterDef = new AnnotationNode(new ClassNode(FilterDef.class));
-		filterDef.addMember("name", new ConstantExpression("deletedFilter"));
+//		AnnotationNode filterDef = new AnnotationNode(new ClassNode(FilterDef.class));
+//		filterDef.addMember("name", new ConstantExpression("deletedFilter"));
+//
+//		AnnotationNode paramDef = new AnnotationNode(new ClassNode(ParamDef.class));
+//		paramDef.addMember("name", new ConstantExpression("deletedParam"));
+//		paramDef.addMember("type", new ConstantExpression("bool"));
+//
+//		filterDef.addMember("parameters", new AnnotationConstantExpression(paramDef));
+//		node.addAnnotation(filterDef);
 
-		AnnotationNode paramDef = new AnnotationNode(new ClassNode(ParamDef.class));
-		paramDef.addMember("name", new ConstantExpression("deletedParam"));
-		paramDef.addMember("type", new ConstantExpression("bool"));
-
-		filterDef.addMember("parameters", new AnnotationConstantExpression(paramDef));
-		node.addAnnotation(filterDef);
+		AnnotationNode filter = new AnnotationNode(new ClassNode(Filter.class));
+		filter.addMember("name", new ConstantExpression("deletedFilter"));
+		node.addAnnotation(filter);
 	}
 
 	private void implementDeletedDomainClassInterface(ClassNode node){
